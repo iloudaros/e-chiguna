@@ -1,0 +1,94 @@
+Table User [headercolor: #24BAB1]
+{
+  username varchar [pk]
+  password varchar
+  email varchar
+  is_manager bit [default: 0]
+  score integer [default:0]
+  balance integer [default:0]
+  note: 'The table where user information and their role is stored'
+}
+
+Table Store  [headercolor: #EB801B]
+{
+  id integer [increment, pk]
+  name varchar
+  address varchar
+  longtitude float
+  latitude float
+}
+
+Table Discount [headercolor: #1E69FD]
+{
+  id integer [pk]
+  username varchar [ref: > User.username]
+  product integer [ref: > Product.id]
+  price float 
+  date date
+  
+}
+
+Table Reaction [headercolor: #1E69FD]
+{
+  username varchar [ref: > User.username, pk]
+  discount integer [ref: > Discount.id]
+  liked bit [default: 0]
+  disliked bit [default: 0]
+  date date
+}
+
+
+Table Product [headercolor: #6724BB]
+{
+  id integer [pk]
+  name varchar
+  category varchar //[ref: - Category.name]
+  subcategory varchar //[ref: - Category.name]
+}
+
+Table Products_in_Store [headercolor: #EB801B]
+{
+  store_id integer [ref: > Store.id]
+  product_id integer [ref: - Product.id]
+  availability integer
+}
+
+Table Price [headercolor: #EB801B]
+{
+  product_id integer [ref: > Product.id]
+  store_id integer [ref: > Store.id]
+  date date
+  price integer
+}
+
+Table Cart [headercolor: #24BAB1]
+{
+  username varchar [ref: - User.username, pk]
+  product_id integer [ref: - Product.id]
+  quantity integer
+  
+}
+
+//Table Category
+//{
+//  name varchar [pk]
+//  subcategory_of varchar [default: "-", ref: - Category.name]
+//}
+
+Table Score_History [headercolor: #24BAB1]
+{
+  id integer [pk, increment]
+  username varchar [ref:> User.username]
+  current_score integer
+  total_score integer
+  date date
+}
+
+Table Token_History [headercolor: #24BAB1]
+{
+  id integer [pk, increment]
+  username varchar [ref:> User.username]
+  tokens_given integer
+  total_tokens integer
+  date date
+}
