@@ -1,3 +1,12 @@
+Project e_chiguna {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # e-chiguna Database
+    This is a database created for the University Project of the Web course.
+    More about this project can be found [here](https://github.com/iloudaros/e-chiguna) 
+  '''
+}
+
 Table User [headercolor: #24BAB1]
 {
   username varchar [pk]
