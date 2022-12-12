@@ -1,3 +1,12 @@
+Project e_chiguna {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # e-chiguna Database
+    This is a database created for the University Project of the Web course.
+    More about this project can be found [here](https://github.com/iloudaros/e-chiguna) 
+  '''
+}
+
 Table User [headercolor: #24BAB1]
 {
   username varchar [pk]
@@ -6,7 +15,7 @@ Table User [headercolor: #24BAB1]
   is_manager bit [default: 0]
   score integer [default:0]
   balance integer [default:0]
-  note: 'The table where user information and their role is stored'
+  note: 'The table where user information and their role is stored.'
 }
 
 Table Store  [headercolor: #EB801B]
@@ -16,6 +25,7 @@ Table Store  [headercolor: #EB801B]
   address varchar
   longtitude float
   latitude float
+  note: 'every entry in this table represents a Store.'
 }
 
 Table Discount [headercolor: #1E69FD]
@@ -23,9 +33,9 @@ Table Discount [headercolor: #1E69FD]
   id integer [pk]
   username varchar [ref: > User.username]
   product integer [ref: > Product.id]
-  price float 
+  price float
   date date
-  
+  note: 'Here we store the discounts that the users submit to e-chiguna.'
 }
 
 Table Reaction [headercolor: #1E69FD]
@@ -35,6 +45,7 @@ Table Reaction [headercolor: #1E69FD]
   liked bit [default: 0]
   disliked bit [default: 0]
   date date
+  note: 'Here we store the reaction of the users to a specific discount.'
 }
 
 
@@ -44,6 +55,7 @@ Table Product [headercolor: #6724BB]
   name varchar
   category varchar //[ref: - Category.name]
   subcategory varchar //[ref: - Category.name]
+  note: 'Here we store all the products that we know. For products of a single store, check the table "Products_in_Store".'
 }
 
 Table Products_in_Store [headercolor: #EB801B]
@@ -51,6 +63,7 @@ Table Products_in_Store [headercolor: #EB801B]
   store_id integer [ref: > Store.id]
   product_id integer [ref: - Product.id]
   availability integer
+  note: 'This table contains the products available in each store.'
 }
 
 Table Price [headercolor: #EB801B]
@@ -59,15 +72,16 @@ Table Price [headercolor: #EB801B]
   store_id integer [ref: > Store.id]
   date date
   price integer
+  note: 'This table contains the prices that are submitted from the administrator.'
 }
 
-Table Cart [headercolor: #24BAB1]
-{
-  username varchar [ref: - User.username, pk]
-  product_id integer [ref: - Product.id]
-  quantity integer
-  
-}
+//Table Cart [headercolor: #24BAB1]
+//{
+//  username varchar [ref: - User.username, pk]
+//  product_id integer [ref: - Product.id]
+//  quantity integer
+//  note: 'This table stores the shopping cart of each user.'
+//}
 
 //Table Category
 //{
@@ -79,16 +93,19 @@ Table Score_History [headercolor: #24BAB1]
 {
   id integer [pk, increment]
   username varchar [ref:> User.username]
-  current_score integer
-  total_score integer
+  current_score integer [note: 'This is the score of the month stated in the field "date".']
+  total_score integer [note: 'This is the sum of the score of all of the previous months, before the month stated at the field "date".']
   date date
+  note: 'This table keeps a record of the score of each user.'
 }
 
 Table Token_History [headercolor: #24BAB1]
 {
   id integer [pk, increment]
   username varchar [ref:> User.username]
-  tokens_given integer
-  total_tokens integer
+  tokens_given integer [note: 'These are the tokens given to the user (stated in "username") for the month stated in the field "date".']
+  total_tokens integer [note: 'This is the token total of the user (stated in "username") up to the previous month of the one stated in the field "date".']
   date date
+  note: 'This table keeps a record of the tokens of each user.'
+
 }
