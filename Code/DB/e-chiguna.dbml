@@ -1,5 +1,5 @@
 Project e_chiguna {
-  database_type: 'PostgreSQL'
+  database_type: 'MySQL'
   Note: '''
     # e-chiguna Database
     This is a database created for the University Project of the Web course.
