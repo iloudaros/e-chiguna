@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS `e-chiguna`;
+CREATE DATABASE `e-chiguna`;
+USE `e-chiguna`;
+
 CREATE TABLE `User` (
   `username` varchar(255) PRIMARY KEY,
   `password` varchar(255),
@@ -8,7 +12,7 @@ CREATE TABLE `User` (
 );
 
 CREATE TABLE `Store` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `id` integer PRIMARY KEY,
   `name` varchar(255),
   `address` varchar(255),
   `longtitude` float,
@@ -41,18 +45,20 @@ CREATE TABLE `Product` (
 CREATE TABLE `Products_in_Store` (
   `store_id` integer,
   `product_id` integer,
-  `availability` integer
+  `availability` integer,
+  PRIMARY KEY (`store_id`, `product_id`)
 );
 
 CREATE TABLE `Price` (
   `product_id` integer,
   `store_id` integer,
   `date` date,
-  `price` integer
+  `price` integer,
+  PRIMARY KEY (`product_id`, `store_id`, `date`)
 );
 
 CREATE TABLE `Score_History` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `id` integer PRIMARY KEY,
   `username` varchar(255),
   `current_score` integer COMMENT 'This is the score of the month stated in the field "date".',
   `total_score` integer COMMENT 'This is the sum of the score of all of the previous months, before the month stated at the field "date".',
@@ -60,7 +66,7 @@ CREATE TABLE `Score_History` (
 );
 
 CREATE TABLE `Token_History` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `id` integer PRIMARY KEY,
   `username` varchar(255),
   `tokens_given` integer COMMENT 'These are the tokens given to the user (stated in "username") for the month stated in the field "date".',
   `total_tokens` integer COMMENT 'This is the token total of the user (stated in "username") up to the previous month of the one stated in the field "date".',
