@@ -17,7 +17,7 @@ a:hover {
 
 .bg-image {
   /* The image used */
-  background-image: url("../images/corona.png");
+  background-image: url("../images/chiguna_cart.jpg");
 
   /* Add the blur effect */
   filter: blur(8px);
