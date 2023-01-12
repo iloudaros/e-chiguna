@@ -85,7 +85,7 @@ function getdataprofile() {
 function getusername() {
   $.get("api.php?g=6", function (res) {
     js1 = JSON.parse(res);
-    $("#username1").html(js1[0].username);
+    $("#username1").html(js[0].username);
   });
 }
 
